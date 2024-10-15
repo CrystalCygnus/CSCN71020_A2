@@ -2,11 +2,24 @@
 #include <stdbool.h>
 
 #include "main.h"
+#include "Tests.h"
 
 void main() {
 	int length = 1;
 	int width = 1;
 	bool continueProgram = true;
+
+	// TESTS
+	/*TestPerimeter(2, 4, 12);
+	TestArea(2, 4, 8);
+	TestSetLength(&length, 5, 5);  // It pains me to have these in main.c
+	TestSetLength(&length, -1, 5);
+	TestSetLength(&length, 200, 5);
+	TestSetWidth(&length, 5, 5);
+	TestSetWidth(&length, -1, 5);
+	TestSetWidth(&length, 200, 5);
+	*/
+
 	while (continueProgram) {
 		printWelcomeMenu();
 
@@ -55,6 +68,8 @@ void main() {
 				break;
 			}
 		}
+
+		
 	}
 }
 
@@ -82,14 +97,12 @@ void setWidth(int input, int *width) {
 	}
 }
 
-int getPerimeter(int *length, int *width) {
-	int perimeter = *length + *length + *width;
-	return perimeter;
+int getPerimeter(int length, int width) {
+	return 2 * (length + width);
 }
 
-int getArea(int *length, int *width) {
-	int area = *length * *width;
-	return area;
+int getArea(int length, int width) {
+	return (length * width);
 }
 
 void printWelcomeMenu() {
@@ -106,4 +119,32 @@ void printOptions() {
 	printf("4. Get Rectangle Perimeter\n");
 	printf("5. Get Rectangle Area\n");
 	printf("6. Exit\n");
+}
+
+void TestSetLength(int* len, int testVal, int expected) {
+
+	setLength(testVal, len);
+	int received = *len;
+
+	if (received == expected) {
+		printf("Test passed!\n");
+	}
+	else {
+		printf("\nTest failed.\n");
+		printf("Expected %d, recieved %d\n\n", expected, received);
+	}
+}
+
+void TestSetWidth(int* width, int testVal, int expected) {
+
+	setWidth(testVal, width);
+	int received = *width;
+
+	if (received == expected) {
+		printf("Test passed!\n");
+	}
+	else {
+		printf("\nTest failed.\n");
+		printf("Expected %d, recieved %d\n\n", expected, received);
+	}
 }
